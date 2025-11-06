@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Encuentra tu Plan Ideal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+    <!-- SECCIÓN DE BIENVENIDA -->
+    <section id="intro-section">
+      <h1>Encuentra tu Plan Ideal 💪</h1>
+      <p>
+        Bienvenido a nuestra guía interactiva de bienestar.  
+        Aquí descubrirás el plan perfecto según tus objetivos: adelgazar, ganar masa muscular o mantenerte en forma.  
+        Solo necesitas responder algunas preguntas rápidas y te ayudaremos a conectar con un asesor especializado por WhatsApp.
+      </p>
+      <button id="start-btn" class="btn">Comenzar</button>
+    </section>
+
+    <!-- SECCIÓN DEL CUESTIONARIO -->
+    <section id="quiz-section" style="display: none;">
+      <div id="question" class="question"></div>
+      <div id="options" class="options"></div>
+      <button id="next-btn" class="btn">Siguiente</button>
+    </section>
+
+    <!-- SECCIÓN FINAL -->
+    <section id="result-section" style="display: none;">
+      <h2>¡Listo! 🎉</h2>
+      <p>Haz clic en el siguiente botón para enviar tus respuestas por WhatsApp y recibir tu plan personalizado.</p>
+      <a id="whatsapp-link" class="btn" target="_blank">Enviar por WhatsApp</a>
+    </section>
+  </div>
+
+  <script>
+    // === CONFIGURACIÓN DEL CUESTIONARIO ===
+    const questions = [
+      {
+        question: "¿Cuál es tu objetivo principal?",
+        options: ["Adelgazar", "Ganar masa muscular", "Tonificar el cuerpo", "Mantenerme en forma"]
+      },
+      {
+        question: "¿Con qué frecuencia haces ejercicio?",
+        options: ["Nunca", "1-2 veces por semana", "3-5 veces por semana", "A diario"]
+      },
+      {
+        question: "¿Cuánto tiempo puedes dedicar al día?",
+        options: ["Menos de 30 minutos", "30-60 minutos", "Más de 1 hora"]
+      },
+      {
+        question: "¿Qué tipo de entrenamiento prefieres?",
+        options: ["Cardio", "Pesas", "Mixto", "No lo sé aún"]
+      },
+      {
+        question: "¿Te gustaría recibir una rutina personalizada?",
+        options: ["Sí, claro", "Tal vez", "No por ahora"]
+      }
+    ];
+
+    let currentQuestion = 0;
+    const userAnswers = [];
+
+    const introSection = document.getElementById("intro-section");
+    const quizSection = document.getElementById("quiz-section");
+    const resultSection = document.getElementById("result-section");
+
+    const questionEl = document.getElementById("question");
+    const optionsEl = document.getElementById("options");
+    const nextBtn = document.getElementById("next-btn");
+    const startBtn = document.getElementById("start-btn");
+    const whatsappLink = document.getElementById("whatsapp-link");
+
+    // Mostrar la primera pregunta
+    function showQuestion() {
+      const q = questions[currentQuestion];
+      questionEl.textContent = q.question;
+      optionsEl.innerHTML = "";
+
+      q.options.forEach(option => {
+        const btn = document.createElement("button");
+        btn.textContent = option;
+        btn.classList.add("option-btn");
+        btn.onclick = () => selectOption(option);
+        optionsEl.appendChild(btn);
+      });
+
+      nextBtn.style.display = "none";
+    }
+
+    // Cuando se selecciona una opción
+    function selectOption(option) {
+      userAnswers[currentQuestion] = option;
+      nextBtn.style.display = "inline-block";
+
+      // Marcar la opción seleccionada visualmente
+      document.querySelectorAll(".option-btn").forEach(btn => {
+        btn.classList.remove("selected");
+        if (btn.textContent === option) btn.classList.add("selected");
+      });
+    }
+
+    // Pasar a la siguiente pregunta
+    nextBtn.onclick = () => {
+      currentQuestion++;
+      if (currentQuestion < questions.length) {
+        showQuestion();
+      } else {
+        showResult();
+      }
+    };
+
+    // Mostrar el resultado final
+    function showResult() {
+      quizSection.style.display = "none";
+      resultSection.style.display = "block";
+
+      // Número de WhatsApp de la asesora
+      const numero = "573001234567"; // <-- cambia este número
+
+      const mensaje = encodeURIComponent(
+        `Hola 👋, completé el cuestionario:\n` +
+        questions.map((q, i) => `${q.question} ${userAnswers[i]}`).join("\n") +
+        `\n\nQuisiera recibir mi plan personalizado 💪`
+      );
+
+      whatsappLink.href = `https://wa.me/${numero}?text=${mensaje}`;
+    }
+
+    // Iniciar el cuestionario
+    startBtn.onclick = () => {
+      introSection.style.display = "none";
+      quizSection.style.display = "block";
+      showQuestion();
+    };
+  </script>
+</body>
+</html>
