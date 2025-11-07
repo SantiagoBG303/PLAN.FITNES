@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Despertar Conciencia – Transformación Integral de tu Ser</title>
   <link rel="stylesheet" href="style.css" />
-    <style>
+  <style>
     /* --- LOGO ESTÉTICO --- */
     .logo-container {
       text-align: center;
@@ -16,8 +16,8 @@
     .logo-container img {
       width: 120px;
       height: 120px;
-      object-fit: cover; /* mantiene proporción y recorta suave */
-      border-radius: 50%; /* redondo */
+      object-fit: cover;
+      border-radius: 50%;
       box-shadow: 0 0 15px rgba(0,0,0,0.1);
       border: 2px solid rgba(255,255,255,0.8);
     }
@@ -27,7 +27,6 @@
   <div class="container">
     <!-- SECCIÓN DE BIENVENIDA -->
     <section id="intro-section">
-      <!-- LOGO ENCIMA DEL TÍTULO -->
       <div class="logo-container">
         <img src="pesa.png" alt="Logo Despertar Conciencia" class="logo" width="120" />
       </div>
@@ -65,6 +64,16 @@
 
   <script>
     const questions = [
+      // 🔹 Nuevas preguntas iniciales
+      {
+        question: "¿Cuál es tu nombre completo?",
+        input: true
+      },
+      {
+        question: "¿Cuál es tu correo electrónico?",
+        input: true
+      },
+      // 🔹 Preguntas originales
       {
         question: "¿Cuál es tu objetivo principal con este plan de nutrición y entrenamiento?",
         options: [
@@ -93,19 +102,25 @@
       },
       {
         question: "¿Tienes alguna alergia alimentaria?",
-        options: ["Sí", "No"]
+        options: ["Sí", "No"],
+        key: "alergia"
       },
       {
         question: "¿A qué alimentos eres alérgico?",
-        input: true
+        input: true,
+        dependsOn: "alergia",
+        showIf: "Sí"
       },
       {
         question: "¿Consumes actualmente algún medicamento o suplemento?",
-        options: ["Sí", "No"]
+        options: ["Sí", "No"],
+        key: "medicamento"
       },
       {
         question: "¿Cuál(es)?",
-        input: true
+        input: true,
+        dependsOn: "medicamento",
+        showIf: "Sí"
       },
       {
         question: "¿Cuántos días a la semana realizas actividad física actualmente?",
@@ -161,6 +176,14 @@
 
     function showQuestion() {
       const q = questions[currentQuestion];
+      
+      // Si la pregunta depende de otra y la condición no se cumple, saltarla
+      if (q.dependsOn && userAnswers[q.dependsOn] !== q.showIf) {
+        currentQuestion++;
+        showQuestion();
+        return;
+      }
+
       questionEl.textContent = q.question;
       optionsEl.innerHTML = "";
 
@@ -171,7 +194,7 @@
         optionsEl.appendChild(input);
 
         input.addEventListener("input", () => {
-          userAnswers[q.question] = input.value;
+          userAnswers[q.key || q.question] = input.value;
           nextBtn.style.display = input.value.trim() ? "inline-block" : "none";
         });
 
@@ -183,7 +206,7 @@
           btn.onclick = () => {
             btn.classList.toggle("selected");
             const selected = Array.from(optionsEl.querySelectorAll(".selected")).map(b => b.textContent);
-            userAnswers[q.question] = selected.join(", ");
+            userAnswers[q.key || q.question] = selected.join(", ");
             nextBtn.style.display = selected.length > 0 ? "inline-block" : "none";
           };
           optionsEl.appendChild(btn);
@@ -194,7 +217,7 @@
           const btn = document.createElement("button");
           btn.textContent = option;
           btn.classList.add("option-btn");
-          btn.onclick = () => selectOption(q.question, option);
+          btn.onclick = () => selectOption(q.key || q.question, option);
           optionsEl.appendChild(btn);
         });
       }
