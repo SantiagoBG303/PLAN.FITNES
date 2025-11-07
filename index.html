@@ -1,23 +1,49 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Encuentra tu Plan Ideal</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Despertar Conciencia – Transformación Integral de tu Ser</title>
+  <link rel="stylesheet" href="style.css" />
+    <style>
+    /* --- LOGO ESTÉTICO --- */
+    .logo-container {
+      text-align: center;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    .logo-container img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover; /* mantiene proporción y recorta suave */
+      border-radius: 50%; /* redondo */
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      border: 2px solid rgba(255,255,255,0.8);
+    }
+  </style>
 </head>
 <body>
-
   <div class="container">
     <!-- SECCIÓN DE BIENVENIDA -->
     <section id="intro-section">
-      <h1>Encuentra tu Plan Ideal 💪</h1>
+      <!-- LOGO ENCIMA DEL TÍTULO -->
+      <div class="logo-container">
+        <img src="pesa.png" alt="Logo Despertar Conciencia" class="logo" width="120" />
+      </div>
+
+      <h1>DESPERTAR CONCIENCIA  TRANSFORMACIÓN INTEGRAL DE TU SER</h1>
+      <h3>Nutrición, entrenamiento y desarrollo del ser en 4 meses</h3>
       <p>
-        Bienvenido a nuestra guía interactiva de bienestar.  
-        Aquí descubrirás el plan perfecto según tus objetivos: adelgazar, ganar masa muscular o mantenerte en forma.  
-        Solo necesitas responder algunas preguntas rápidas y te ayudaremos a conectar con un asesor especializado por WhatsApp.
+        Un viaje hacia tu mejor versión física, mental y emocional, guiado por ciencia, conciencia y energía natural.  
+        Transforma tu cuerpo y tu mente en 4 meses a través de un método integral que une nutrición consciente, entrenamiento inteligente y desarrollo del ser.  
+        Sin dietas extremas ni rutinas imposibles — solo ciencia, conciencia y energía real.
       </p>
-      <button id="start-btn" class="btn">Comenzar</button>
+      <p>
+        Responde algunas preguntas rápidas sobre tus hábitos, gustos y metas para crear un plan de nutrición y entrenamiento hecho especialmente para ti.  
+        Al finalizar, tus respuestas serán enviadas directamente a un asesor por WhatsApp para comenzar tu transformación.
+      </p>
+      <button id="start-btn" class="btn">INICIA TU TRANSFORMACIÓN</button>
     </section>
 
     <!-- SECCIÓN DEL CUESTIONARIO -->
@@ -29,80 +55,162 @@
 
     <!-- SECCIÓN FINAL -->
     <section id="result-section" style="display: none;">
-      <h2>¡Listo! 🎉</h2>
-      <p>Haz clic en el siguiente botón para enviar tus respuestas por WhatsApp y recibir tu plan personalizado.</p>
+      <h2>¡Listo!</h2>
+      <p>
+        Haz clic en el siguiente botón para enviar tus respuestas por WhatsApp y recibir tu plan personalizado.
+      </p>
       <a id="whatsapp-link" class="btn" target="_blank">Enviar por WhatsApp</a>
     </section>
   </div>
 
   <script>
-    // === CONFIGURACIÓN DEL CUESTIONARIO ===
     const questions = [
       {
-        question: "¿Cuál es tu objetivo principal?",
-        options: ["Adelgazar", "Ganar masa muscular", "Tonificar el cuerpo", "Mantenerme en forma"]
+        question: "¿Cuál es tu objetivo principal con este plan de nutrición y entrenamiento?",
+        options: [
+          "Rendimiento deportivo – Mejorar tu desempeño en entrenamientos o competencias",
+          "Aumento de masa muscular – Ganar volumen y fuerza muscular",
+          "Pérdida de grasa – Reducir tu porcentaje de grasa corporal",
+          "Recomposición corporal – Ganar músculo y perder grasa al mismo tiempo"
+        ]
       },
       {
-        question: "¿Con qué frecuencia haces ejercicio?",
-        options: ["Nunca", "1-2 veces por semana", "3-5 veces por semana", "A diario"]
+        question: "¿Cuáles de estas comidas realizas en un día normal? (Marca todas las que apliquen)",
+        options: ["Desayuno", "Snack de la mañana", "Almuerzo", "Snack de la tarde", "Cena"],
+        multiple: true
       },
       {
-        question: "¿Cuánto tiempo puedes dedicar al día?",
-        options: ["Menos de 30 minutos", "30-60 minutos", "Más de 1 hora"]
+        question: "¿Hay algún alimento específico que quieras incluir en tu plan? (Ejemplo: queso, arroz, arepa, frutas...)",
+        input: true
       },
       {
-        question: "¿Qué tipo de entrenamiento prefieres?",
-        options: ["Cardio", "Pesas", "Mixto", "No lo sé aún"]
+        question: "¿Cuáles son tus proteínas favoritas que te gustaría incluir en el plan? (Ejemplo: pollo, carne, pescado, huevos, proteína en polvo...)",
+        input: true
       },
       {
-        question: "¿Te gustaría recibir una rutina personalizada?",
-        options: ["Sí, claro", "Tal vez", "No por ahora"]
+        question: "¿Hay algún alimento que prefieres NO incluir en tu plan porque no te gusta o no lo consumes? (Ejemplo: brócoli, mariscos, lácteos...)",
+        input: true
+      },
+      {
+        question: "¿Tienes alguna alergia alimentaria?",
+        options: ["Sí", "No"]
+      },
+      {
+        question: "¿A qué alimentos eres alérgico?",
+        input: true
+      },
+      {
+        question: "¿Consumes actualmente algún medicamento o suplemento?",
+        options: ["Sí", "No"]
+      },
+      {
+        question: "¿Cuál(es)?",
+        input: true
+      },
+      {
+        question: "¿Cuántos días a la semana realizas actividad física actualmente?",
+        options: [
+          "Ninguno",
+          "1-3 días/semana",
+          "3-5 días/semana",
+          "6-7 días/semana",
+          "7 días + trabajo físico"
+        ]
+      },
+      {
+        question: "¿Qué metodología de entrenamiento prefieres?",
+        options: ["Gimnasio", "Casa (con mancuernas, bandas)"]
+      },
+      {
+        question: "¿Cuál es tu horario preferido de entreno?",
+        options: ["Mañana", "Tarde", "Noche"]
+      },
+      {
+        question: "¿Cuál es tu nivel de experiencia con el entrenamiento?",
+        options: ["Principiante", "Intermedio", "Avanzado"]
+      },
+      {
+        question: "¿Practicas meditación o alguna técnica de respiración?",
+        options: ["Sí", "No"]
+      },
+      {
+        question: "¿Con qué frecuencia meditas?",
+        input: true
+      },
+      {
+        question: "¿Qué esperas lograr en estos 4 meses?",
+        input: true
+      },
+      {
+        question: "¿Cuánto tiempo estás dispuesto(a) a dedicar al programa semanalmente?",
+        input: true
       }
     ];
 
     let currentQuestion = 0;
-    const userAnswers = [];
+    const userAnswers = {};
 
     const introSection = document.getElementById("intro-section");
     const quizSection = document.getElementById("quiz-section");
     const resultSection = document.getElementById("result-section");
-
     const questionEl = document.getElementById("question");
     const optionsEl = document.getElementById("options");
     const nextBtn = document.getElementById("next-btn");
     const startBtn = document.getElementById("start-btn");
     const whatsappLink = document.getElementById("whatsapp-link");
 
-    // Mostrar la primera pregunta
     function showQuestion() {
       const q = questions[currentQuestion];
       questionEl.textContent = q.question;
       optionsEl.innerHTML = "";
 
-      q.options.forEach(option => {
-        const btn = document.createElement("button");
-        btn.textContent = option;
-        btn.classList.add("option-btn");
-        btn.onclick = () => selectOption(option);
-        optionsEl.appendChild(btn);
-      });
+      if (q.input) {
+        const input = document.createElement("textarea");
+        input.placeholder = "Escribe tu respuesta aquí...";
+        input.classList.add("input-answer");
+        optionsEl.appendChild(input);
+
+        input.addEventListener("input", () => {
+          userAnswers[q.question] = input.value;
+          nextBtn.style.display = input.value.trim() ? "inline-block" : "none";
+        });
+
+      } else if (q.multiple) {
+        q.options.forEach(option => {
+          const btn = document.createElement("button");
+          btn.textContent = option;
+          btn.classList.add("option-btn");
+          btn.onclick = () => {
+            btn.classList.toggle("selected");
+            const selected = Array.from(optionsEl.querySelectorAll(".selected")).map(b => b.textContent);
+            userAnswers[q.question] = selected.join(", ");
+            nextBtn.style.display = selected.length > 0 ? "inline-block" : "none";
+          };
+          optionsEl.appendChild(btn);
+        });
+
+      } else {
+        q.options.forEach(option => {
+          const btn = document.createElement("button");
+          btn.textContent = option;
+          btn.classList.add("option-btn");
+          btn.onclick = () => selectOption(q.question, option);
+          optionsEl.appendChild(btn);
+        });
+      }
 
       nextBtn.style.display = "none";
     }
 
-    // Cuando se selecciona una opción
-    function selectOption(option) {
-      userAnswers[currentQuestion] = option;
+    function selectOption(question, option) {
+      userAnswers[question] = option;
       nextBtn.style.display = "inline-block";
-
-      // Marcar la opción seleccionada visualmente
       document.querySelectorAll(".option-btn").forEach(btn => {
         btn.classList.remove("selected");
         if (btn.textContent === option) btn.classList.add("selected");
       });
     }
 
-    // Pasar a la siguiente pregunta
     nextBtn.onclick = () => {
       currentQuestion++;
       if (currentQuestion < questions.length) {
@@ -112,24 +220,20 @@
       }
     };
 
-    // Mostrar el resultado final
     function showResult() {
       quizSection.style.display = "none";
       resultSection.style.display = "block";
 
-      // Número de WhatsApp de la asesora
-      const numero = "573213065591"; // <-- cambia este número
-
+      const numero = "573213065591"; // CAMBIA ESTE NÚMERO
       const mensaje = encodeURIComponent(
-        `Hola 👋, completé el cuestionario:\n` +
-        questions.map((q, i) => `${q.question} ${userAnswers[i]}`).join("\n") +
-        `\n\nQuisiera recibir mi plan personalizado 💪`
+        "Hola, completé el formulario de mi plan personalizado:\n\n" +
+        Object.entries(userAnswers).map(([q, a]) => `• ${q}\n→ ${a}`).join("\n\n") +
+        "\n\nQuisiera recibir mi plan."
       );
 
       whatsappLink.href = `https://wa.me/${numero}?text=${mensaje}`;
     }
 
-    // Iniciar el cuestionario
     startBtn.onclick = () => {
       introSection.style.display = "none";
       quizSection.style.display = "block";
