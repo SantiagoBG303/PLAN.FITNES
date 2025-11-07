@@ -141,3 +141,99 @@ p {
     font-size: 1rem;
   }
 }
+
+
+
+
+
+/* --- ESTILOS RESPONSIVOS --- */
+
+/* Contenedor general */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Texto y secciones */
+#intro-section, #quiz-section, #result-section {
+  padding: 20px;
+  border-radius: 16px;
+}
+
+/* Botones */
+.btn, .option-btn {
+  font-size: 1rem;
+  padding: 12px 20px;
+  margin: 8px;
+  border-radius: 10px;
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+}
+
+/* --- MODO MÓVIL --- */
+@media (max-width: 768px) {
+  body {
+    font-size: 16px;
+    padding: 0;
+    margin: 0;
+  }
+
+  .container {
+    width: 95%;
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 1.4rem;
+    line-height: 1.3;
+  }
+
+  h3 {
+    font-size: 1.1rem;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+
+  .btn, .option-btn {
+    width: 100%;
+    font-size: 1rem;
+    padding: 14px;
+    margin: 6px 0;
+  }
+
+  .input-answer {
+    width: 100%;
+    font-size: 1rem;
+    min-height: 90px;
+  }
+
+  .logo-container img {
+    width: 90px;
+    height: 90px;
+  }
+}
+
+/* --- MODO EXTRA PEQUEÑO (celulares muy chicos) --- */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.2rem;
+  }
+
+  h3 {
+    font-size: 1rem;
+  }
+
+  p {
+    font-size: 0.95rem;
+  }
+
+  .btn, .option-btn {
+    font-size: 0.95rem;
+    padding: 12px;
+  }
+}
+
