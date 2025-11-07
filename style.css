@@ -237,3 +237,40 @@ p {
   }
 }
 
+
+
+
+
+/* Ajuste específico para el botón de WhatsApp en móviles */
+#result-section .btn {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  margin: 20px auto 0;
+  text-align: center;
+  font-size: 1rem;
+}
+
+/* Asegura que el contenedor del resultado no se achique */
+#result-section {
+  text-align: center;
+  padding: 20px;
+  border-radius: 16px;
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+}
+
+/* En pantallas pequeñas, centrado y ancho completo */
+@media (max-width: 768px) {
+  #result-section .btn {
+    width: 100%;
+    max-width: none;
+    font-size: 1rem;
+    padding: 14px;
+  }
+
+  #result-section {
+    width: 100%;
+    padding: 15px;
+  }
+}
